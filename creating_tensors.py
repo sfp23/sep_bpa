@@ -5,7 +5,7 @@ import os
 os.chdir('/labs/shahlab/spoole/Sepsis/tensors/cases')
 #os.chdir('/Users/spoole/Documents/Sepsis/tensors/cases')
 
-con = MySQLdb.connect(host = 'ncbolabs-db1.stanford.edu', user = 'spoole', passwd = '7X_QLudcFx7e')
+con = MySQLdb.connect(host = 'ncbolabs-db1.stanford.edu', user = 'spoole', passwd = '***')
 curs = con.cursor()
 
 # Finding total num features
