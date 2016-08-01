@@ -11,7 +11,7 @@ library(chron)
 # Connect to SQL database
 # Note: password has been removed for security reasons, so this code will not run
 drv = dbDriver("MySQL")
-con = dbConnect(drv, user = "spoole", host = "ncbolabs-db1.stanford.edu", password = "7X_QLudcFx7e")
+con = dbConnect(drv, user = "spoole", host = "ncbolabs-db1.stanford.edu", password = "*******")
 
 # Find unique patients
 unique_patients = unlist(dbGetQuery(con, 'SELECT * FROM user_spoole.sepsis_allSTRIDE_BPA_patients;'))
