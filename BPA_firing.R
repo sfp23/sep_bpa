@@ -37,7 +37,7 @@ find_BPA_times = function(pat_num) {
   # Connect to SQL database
   # Note: password has been removed for security reasons, so this code will not run
   drv = dbDriver("MySQL")
-  con_int = dbConnect(drv, user = "spoole", host = "ncbolabs-db1.stanford.edu", password = "7X_QLudcFx7e")
+  con_int = dbConnect(drv, user = "spoole", host = "ncbolabs-db1.stanford.edu", password = "***")
   
   print(pat_num)
   
