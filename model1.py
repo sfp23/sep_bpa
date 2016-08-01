@@ -44,7 +44,7 @@ for file in os.listdir('.'):
 		inputs.append(np.load(file))
 
 os.chdir('/labs/shahlab/spoole/Sepsis/models')
-con = mysql.connector.connect(host = 'ncbolabs-db1.stanford.edu', user = 'spoole', passwd = '7X_QLudcFx7e')
+con = mysql.connector.connect(host = 'ncbolabs-db1.stanford.edu', user = 'spoole', passwd = '***')
 curs = con.cursor()
 
 # Finding actual bpa times (relative to start of episode)
