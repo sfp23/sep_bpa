@@ -23,7 +23,7 @@ dbDisconnect(con)
 allcontrols = controls_episodes
 
 library(FNN)
-# Matching on age at alert and duration of episode (i.e. length of stay)
+# Matching on age at episode and duration of episode (i.e. length of stay)
 output = get.knnx(data = allcontrols[, c(5, 3)], query = cases[, c(10, 8)], k = 1000)
 
 # Indices of cases that have exact matches, sorted by how many exact matches they have
