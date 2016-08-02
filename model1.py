@@ -56,6 +56,10 @@ bpa_times = np.asarray(temp, dtype = np.dtype([('episode', int), ('bpa_start_tim
 bpa_start = np.zeros(len(inputs))
 bpa_end = np.zeros(len(inputs))
 
+controls = 0
+cases = 0
+control_inds = []
+case_inds = []
 for i in range(len(inputs)):
 	ep = episodes[i]
 	ind = np.where(bpa_times['episode'] == ep)[0]
@@ -63,10 +67,12 @@ for i in range(len(inputs)):
 	if len(ind) == 0:
 		bpa_start[i] = None
 		bpa_end[i] = None
+		controls = controls + 1
 	# For cases: record bpa start and end times
 	else:
 		bpa_start[i] = bpa_times['bpa_start_time'][ind[0]]
 		bpa_end[i] = bpa_times['bpa_end_time'][ind[0]]
+		cases = cases + 1
 
 # Creating labels, with option to move alert start to before actual alert
 labels = []
@@ -80,7 +86,10 @@ for i in range(len(inputs)):
 		on_time = bpa_start[i] - offset
 		off_time = bpa_end[i]
 		times = inputs[i][:, 0]
-		l[np.where((times >= on_time) & (times <= off_time))[0]] = 1
+		inds = np.where((times >= on_time) & (times <= off_time))[0]
+		if len(inds) == 0:
+			inds = -1
+		l[inds] = 1
 	labels.append(l)
 
 
@@ -237,3 +246,10 @@ for t in range(len(thresholds)):
 	mean_timediff[t] = np.nanmean(time_diffs[:, t])
 	median_timediff[t] = np.nanmedian(time_diffs[:, t])
 
+import csv
+fmain = open('model0_eval.csv', 'w')
+fmain.write(','.join(('false_positives', 'false_negatives', 'mean_timediff', 'median_timediff\r\n')))
+for t in range(len(thresholds)):
+	print(t)
+	fmain.write(','.join((str(false_positives[t]), str(false_negatives[t]), str(mean_timediff[t]), ''.join((str(median_timediff[t]), '\r\n')))))
+fmain.close()
